@@ -1,0 +1,407 @@
+/* Meal Plans Styles */
+
+/* Goal Selection */
+.goal-selection {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.goal-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.goal-card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: all var(--transition);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.goal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+    transform: scaleX(0);
+    transition: transform var(--transition);
+}
+
+.goal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    border-color: var(--color-primary);
+}
+
+.goal-card:hover::before {
+    transform: scaleX(1);
+}
+
+.goal-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.goal-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--color-bg);
+    margin: 0 0 1rem 0;
+}
+
+.goal-card p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+}
+
+.goal-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.calorie-range {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.macro-ratio {
+    background: #f8f9fa;
+    color: #666;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    text-align: center;
+    border: 1px solid #e1e5e9;
+}
+
+/* Meal Plan Display */
+.meal-plan-display {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.meal-plan-content {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    margin-top: 2rem;
+}
+
+.meal-table {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+}
+
+.meal-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.meal-table th {
+    background: var(--color-bg);
+    color: var(--color-text);
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.meal-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+}
+
+.meal-table tr:last-child td {
+    border-bottom: none;
+}
+
+.meal-table tr:hover {
+    background: #f8f9fa;
+}
+
+.meal-name {
+    font-weight: 600;
+    color: var(--color-bg);
+    min-width: 120px;
+}
+
+.meal-food {
+    color: #333;
+    line-height: 1.5;
+    max-width: 400px;
+}
+
+.meal-calories {
+    font-weight: 600;
+    color: var(--color-primary);
+    text-align: center;
+    min-width: 80px;
+}
+
+.meal-macros {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    color: #666;
+    text-align: center;
+    min-width: 100px;
+}
+
+.totals-row {
+    background: var(--color-primary) !important;
+    color: var(--color-bg);
+}
+
+.totals-row td {
+    font-weight: 700;
+    border-bottom: none;
+}
+
+.totals-row .meal-food {
+    color: var(--color-bg);
+}
+
+/* Meal Tips */
+.meal-tips {
+    background: #f8f9fa;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--color-primary);
+}
+
+.meal-tips h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-bg);
+    margin: 0 0 1rem 0;
+}
+
+.meal-tips ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.meal-tips li {
+    padding: 0.5rem 0;
+    color: #666;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.meal-tips li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Meal Actions */
+.meal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.meal-actions .btn {
+    min-width: 150px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .goal-cards {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .goal-card {
+        padding: 1.5rem;
+    }
+    
+    .meal-plan-content {
+        padding: 1rem;
+    }
+    
+    .meal-table {
+        font-size: 0.9rem;
+    }
+    
+    .meal-table th,
+    .meal-table td {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .meal-food {
+        max-width: 200px;
+    }
+    
+    .meal-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .meal-actions .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .goal-cards {
+        gap: 1rem;
+    }
+    
+    .goal-card {
+        padding: 1rem;
+    }
+    
+    .goal-icon {
+        font-size: 2.5rem;
+    }
+    
+    .goal-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .meal-table {
+        font-size: 0.8rem;
+    }
+    
+    .meal-table th,
+    .meal-table td {
+        padding: 0.5rem 0.25rem;
+    }
+    
+    .meal-food {
+        max-width: 150px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .sidebar,
+    .dashboard-header,
+    .meal-actions,
+    .section-header button {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+    }
+    
+    .dashboard-content {
+        padding: 0 !important;
+    }
+    
+    .meal-plan-content {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+    }
+    
+    .meal-table {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+    }
+    
+    .meal-table th {
+        background: #f0f0f0 !important;
+        color: #000 !important;
+    }
+    
+    .totals-row {
+        background: #e0e0e0 !important;
+        color: #000 !important;
+    }
+    
+    .meal-tips {
+        background: #f9f9f9 !important;
+        border: 1px solid #ccc !important;
+    }
+}
+
+/* Animation for goal cards */
+.goal-card {
+    animation: slideUp 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.goal-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.goal-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.goal-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading state for goal selection */
+.goal-card.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.goal-card.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+} 
