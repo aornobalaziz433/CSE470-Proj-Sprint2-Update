@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community - Hercules Pro</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    .community-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .community-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .community-header h1 {
+      color: #2c1810;
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    
+    .community-header p {
+      color: #666;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      margin-bottom: 1.5rem;
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .create-post-btn {
+      background: linear-gradient(135deg, #28a745, #20c997);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    }
+    
+    .create-post-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    }
+    
+    .my-posts-btn {
+      background: linear-gradient(135deg, #17a2b8, #6f42c1);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+    }
+    
+    .my-posts-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(23, 162, 184, 0.4);
+    }
+    
+    .my-posts-btn.active {
+      background: linear-gradient(135deg, #6f42c1, #17a2b8);
+    }
+    
+    .filters-section {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e5e5;
+      margin-bottom: 2rem;
+    }
+    
+    .filters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      align-items: end;
+    }
+    
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .filter-group label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+    
+    .filter-group input,
+    .filter-group select {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    
+    .filter-group input:focus,
+    .filter-group select:focus {
+      outline: none;
+      border-color: #f5e9da;
+      box-shadow: 0 0 0 2px rgba(245, 233, 218, 0.3);
+    }
+    
+    .clear-filters-btn {
+      background: #6c757d;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+    
+    .clear-filters-btn:hover {
+      background: #5a6268;
+    }
+    
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .post-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e5e5;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .post-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+    
+    .post-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #e5e5e5;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .post-author-avatar {
+      width: 40px;
+      height: 40px;
+      background: #f5e9da;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c1810;
+    }
+    
+    .post-author-info {
+      flex: 1;
+    }
+    
+    .post-author-name {
+      font-weight: 600;
+      color: #2c1810;
+      margin-bottom: 0.25rem;
+    }
+    
+    .post-timestamp {
+      font-size: 0.8rem;
+      color: #666;
+    }
+    
+    .post-category {
+      display: inline-block;
+      background: #f5e9da;
+      color: #2c1810;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .post-content {
+      padding: 1.5rem;
+    }
+    
+    .post-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #2c1810;
+      margin-bottom: 1rem;
+    }
+    
+    .post-description {
+      color: #666;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    
+    .transformation-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .transformation-image {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 1;
+    }
+    
+    .transformation-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .image-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .post-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    
+    .action-btn {
+      background: #f8f9fa;
+      color: #666;
+      border: 1px solid #e9ecef;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .action-btn:hover {
+      background: #e9ecef;
+      color: #333;
+    }
+    
+    .action-btn.liked {
+      background: #ff6b6b;
+      color: white;
+      border-color: #ff6b6b;
+    }
+    
+    .action-btn.liked:hover {
+      background: #ff5252;
+    }
+    
+    .delete-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.2s ease;
+      flex: 1;
+    }
+    
+    .delete-btn:hover {
+      background: #c82333;
+    }
+    
+    .no-posts {
+      text-align: center;
+      padding: 3rem;
+      color: #666;
+    }
+    
+    .no-posts span {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    
+    .post-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 0;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    .modal-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid #e5e5e5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #2c1810;
+    }
+    
+    .close-modal {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #666;
+    }
+    
+    .modal-body {
+      padding: 1.5rem;
+    }
+    
+    .modal-transformation-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .modal-transformation-image {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 1;
+    }
+    
+    .modal-transformation-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .modal-description {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    
+    .modal-author {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .modal-btn {
+      flex: 1;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+    
+    .modal-btn.primary {
+      background: #28a745;
+      color: white;
+    }
+    
+    .modal-btn.primary:hover {
+      background: #218838;
+    }
+    
+    .modal-btn.secondary {
+      background: #6c757d;
+      color: white;
+    }
+    
+    .modal-btn.secondary:hover {
+      background: #5a6268;
+    }
+    
+    /* Create Post Form Styles */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+    
+    .form-group label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #f5e9da;
+      box-shadow: 0 0 0 2px rgba(245, 233, 218, 0.3);
+    }
+    
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      border-top: 1px solid #e5e5e5;
+      padding-top: 1.5rem;
+    }
+    
+    .community-summary {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e5e5;
+      margin-top: 2rem;
+    }
+    
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    
+    .summary-card {
+      text-align: center;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border: 1px solid #e9ecef;
+    }
+    
+    .summary-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #28a745;
+      margin-bottom: 0.5rem;
+    }
+    
+    .summary-label {
+      color: #666;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    @media (max-width: 768px) {
+      .filters-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .posts-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .transformation-images {
+        grid-template-columns: 1fr;
+      }
+      
+      .modal-transformation-images {
+        grid-template-columns: 1fr;
+      }
+      
+      .modal-content {
+        width: 95%;
+        margin: 10% auto;
+      }
+      
+      .modal-actions,
+      .form-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="logo" aria-label="Hercules Pro Home">
+          <img src="assets/hercules-pro-logo.jpg.png" alt="Hercules Pro Logo" class="logo-img">
+          <span class="logo-text">Hercules Pro</span>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item">
+            <a href="dashboard-client.html" class="nav-link">
+              <span class="nav-icon">Dashboard</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="product-marketplace.html" class="nav-link">
+                              <span class="nav-icon">Marketplace</span>
+              <span>Marketplace</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a href="community.html" class="nav-link">
+              <span class="nav-icon">Community</span>
+              <span>Community</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="training-programs.html" class="nav-link">
+              <span class="nav-icon">Training</span>
+              <span>Training Programs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="calorie-tracker.html" class="nav-link">
+              <span class="nav-icon">🍽️</span>
+              <span>Calorie Counter</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="meal-plans.html" class="nav-link">
+              <span class="nav-icon">🥗</span>
+              <span>Nutrition</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#progress" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Progress</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#ai-coach" class="nav-link">
+              <span class="nav-icon">AI Coach</span>
+              <span>AI Coach</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#profile" class="nav-link">
+              <span class="nav-icon">👤</span>
+              <span>Profile</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button class="btn btn-secondary logout-btn" onclick="logout()">
+          <span class="nav-icon">🚪</span>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="community-container">
+        <a href="dashboard-client.html" class="back-btn">← Back to Dashboard</a>
+        
+        <div class="community-header">
+          <h1>Fitness Community</h1>
+          <p>Connect with fellow fitness enthusiasts, share your journey, and get inspired by others</p>
+          <div class="header-actions">
+            <button class="create-post-btn" onclick="openCreatePostModal()">Create Post</button>
+            <button class="my-posts-btn" onclick="toggleMyPosts()">My Posts</button>
+          </div>
+        </div>
+
+        <!-- Filters Section -->
+        <div class="filters-section">
+          <div class="filters-grid">
+            <div class="filter-group">
+              <label for="searchPosts">Search Posts</label>
+              <input type="text" id="searchPosts" placeholder="Search by title or description...">
+            </div>
+            
+            <div class="filter-group">
+              <label for="categoryFilter">Category</label>
+              <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="transformation">Transformation Journey</option>
+                <option value="opinion">Opinion & Advice</option>
+                <option value="suggestion">Suggestions & Tips</option>
+                <option value="motivation">Motivation & Inspiration</option>
+                <option value="question">Questions & Help</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <button class="clear-filters-btn" onclick="clearFilters()">Clear Filters</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Posts Grid -->
+        <div class="posts-grid" id="postsGrid">
+          <!-- Posts will be loaded here dynamically -->
+        </div>
+        
+        <!-- Community Summary -->
+        <div class="community-summary" id="communitySummary">
+          <!-- Summary will be loaded here dynamically -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Post Modal -->
+  <div class="post-modal" id="postModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">Post Title</h2>
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Modal content will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Post Modal -->
+  <div class="post-modal" id="createPostModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Create New Post</h2>
+        <button class="close-modal" onclick="closeCreatePostModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="createPostForm" onsubmit="submitPost(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="postTitle">Post Title *</label>
+              <input type="text" id="postTitle" name="postTitle" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="postCategory">Category *</label>
+              <select id="postCategory" name="postCategory" required>
+                <option value="">Select Category</option>
+                <option value="transformation">Transformation Journey</option>
+                <option value="opinion">Opinion & Advice</option>
+                <option value="suggestion">Suggestions & Tips</option>
+                <option value="motivation">Motivation & Inspiration</option>
+                <option value="question">Questions & Help</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <div class="form-group full-width">
+              <label for="postDescription">Description *</label>
+              <textarea id="postDescription" name="postDescription" rows="4" required placeholder="Share your thoughts, journey, or ask questions..."></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="beforeImage">Before Image URL</label>
+              <input type="url" id="beforeImage" name="beforeImage" placeholder="https://example.com/before.jpg">
+            </div>
+            
+            <div class="form-group">
+              <label for="afterImage">After Image URL</label>
+              <input type="url" id="afterImage" name="afterImage" placeholder="https://example.com/after.jpg">
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="modal-btn secondary" onclick="closeCreatePostModal()">Cancel</button>
+            <button type="submit" class="modal-btn primary">Create Post</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/community.js"></script>
+</body>
+</html>

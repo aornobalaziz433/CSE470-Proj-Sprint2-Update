@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training Programs - Hercules Pro</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="stylesheet" href="styles/training-programs.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="logo" aria-label="Hercules Pro Home">
+          <img src="assets/hercules-pro-logo.jpg.png" alt="Hercules Pro Logo" class="logo-img">
+          <span class="logo-text">Hercules Pro</span>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item">
+            <a href="dashboard-client.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a href="training-programs.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Training Programs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="meal-plans.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Nutrition</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#progress" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Progress</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#ai-coach" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>AI Coach</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#profile" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Profile</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button class="btn btn-secondary logout-btn" onclick="logout()">
+          <span class="nav-icon">🚪</span>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="header-left">
+          <h1>Training Programs</h1>
+          <p>Choose your fitness goal and get personalized training programs</p>
+        </div>
+        <div class="header-right">
+          <div class="user-info">
+            <span class="user-avatar"></span>
+            <div class="user-details">
+              <span class="user-name" id="userNameHeader">Client Name</span>
+              <span class="user-role">Client</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Goal Selection Section -->
+      <div id="goalSelection" class="goal-selection-section">
+        <div class="section-header">
+          <h2>What's Your Goal?</h2>
+          <p>Select your primary fitness goal to get personalized training programs</p>
+        </div>
+        
+        <div class="goals-grid">
+          <div class="goal-card" data-goal="weight-loss">
+            <div class="goal-icon"></div>
+            <h3>Weight Loss</h3>
+            <p>Burn fat and get lean with high-intensity workouts</p>
+            <button class="btn btn-primary">Select Goal</button>
+          </div>
+          
+          <div class="goal-card" data-goal="weight-gain">
+            <div class="goal-icon"></div>
+            <h3>Weight Gain</h3>
+            <p>Build muscle mass and strength with progressive training</p>
+            <button class="btn btn-primary">Select Goal</button>
+          </div>
+          
+          <div class="goal-card" data-goal="muscle-build">
+            <div class="goal-icon"></div>
+            <h3>Muscle Build</h3>
+            <p>Develop lean muscle and improve body composition</p>
+            <button class="btn btn-primary">Select Goal</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Training Programs Section -->
+      <div id="trainingPrograms" class="training-programs-section" style="display: none;">
+        <div class="section-header">
+          <h2 id="programTitle">Training Programs</h2>
+          <button class="btn btn-secondary" onclick="backToGoals()">← Back to Goals</button>
+        </div>
+        
+        <div id="programsContainer" class="programs-container">
+          <!-- Programs will be loaded here dynamically -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="scripts/training-programs.js"></script>
+</body>
+</html> 

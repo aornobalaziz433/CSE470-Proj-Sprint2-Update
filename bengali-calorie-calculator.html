@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bengali Food Calorie Calculator - Hercules Pro</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="stylesheet" href="styles/bengali-calorie-calculator.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="logo" aria-label="Hercules Pro Home">
+          <img src="assets/hercules-pro-logo.jpg.png" alt="Hercules Pro Logo" class="logo-img">
+          <span class="logo-text">Hercules Pro</span>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item">
+            <a href="dashboard-client.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="training-programs.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Training Programs</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a href="bengali-calorie-calculator.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Bengali Calorie Calculator</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="meal-plans.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Nutrition</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#progress" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Progress</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#ai-coach" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>AI Coach</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#profile" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Profile</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button class="btn btn-secondary logout-btn" onclick="logout()">
+          <span class="nav-icon"></span>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="calculator-container">
+        <a href="dashboard-client.html" class="back-btn">← Back to Dashboard</a>
+        
+        <div class="calculator-header">
+          <h1>🍽️ Bengali Food Calorie Calculator</h1>
+          <p>Select your favorite Bengali foods and calculate your daily calorie intake</p>
+        </div>
+
+        <!-- Total Calories Display -->
+        <div class="total-calories">
+          <h2>Total Calories</h2>
+          <div class="calorie-display" id="totalCalories">0</div>
+          <div class="calorie-info" id="calorieInfo">Start adding foods to see your total</div>
+        </div>
+
+        <!-- Selected Foods -->
+        <div class="selected-foods" id="selectedFoods" style="display: none;">
+          <h3>Selected Foods</h3>
+          <div id="selectedFoodsList"></div>
+        </div>
+
+        <!-- Food Categories -->
+        <div class="food-categories">
+          <!-- Rice & Breads -->
+          <div class="category-card">
+            <h3 class="category-title">🍚 Rice & Breads</h3>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Plain Rice (1 cup)</div>
+                <div class="food-calories">205 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('rice')">-</button>
+                <input type="number" id="rice" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('rice')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Roti/Chapati (1 piece)</div>
+                <div class="food-calories">120 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('roti')">-</button>
+                <input type="number" id="roti" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('roti')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Paratha (1 piece)</div>
+                <div class="food-calories">180 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('paratha')">-</button>
+                <input type="number" id="paratha" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('paratha')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Biryani Rice (1 cup)</div>
+                <div class="food-calories">350 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('biryani')">-</button>
+                <input type="number" id="biryani" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('biryani')">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fish & Seafood -->
+          <div class="category-card">
+            <h3 class="category-title">🐟 Fish & Seafood</h3>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Hilsa Fish (100g)</div>
+                <div class="food-calories">280 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('hilsa')">-</button>
+                <input type="number" id="hilsa" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('hilsa')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Rohu Fish (100g)</div>
+                <div class="food-calories">220 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('rohu')">-</button>
+                <input type="number" id="rohu" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('rohu')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Prawn Curry (100g)</div>
+                <div class="food-calories">180 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('prawn')">-</button>
+                <input type="number" id="prawn" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('prawn')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Crab Curry (100g)</div>
+                <div class="food-calories">150 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('crab')">-</button>
+                <input type="number" id="crab" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('crab')">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Meat Dishes -->
+          <div class="category-card">
+            <h3 class="category-title">🍖 Meat Dishes</h3>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Mutton Curry (100g)</div>
+                <div class="food-calories">320 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('mutton')">-</button>
+                <input type="number" id="mutton" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('mutton')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Chicken Curry (100g)</div>
+                <div class="food-calories">250 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('chicken')">-</button>
+                <input type="number" id="chicken" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('chicken')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Beef Curry (100g)</div>
+                <div class="food-calories">280 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('beef')">-</button>
+                <input type="number" id="beef" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('beef')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Kebab (1 piece)</div>
+                <div class="food-calories">150 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('kebab')">-</button>
+                <input type="number" id="kebab" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('kebab')">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vegetables -->
+          <div class="category-card">
+            <h3 class="category-title">🥬 Vegetables</h3>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Aloo Posto (100g)</div>
+                <div class="food-calories">180 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('aloo-posto')">-</button>
+                <input type="number" id="aloo-posto" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('aloo-posto')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Begun Bhaja (100g)</div>
+                <div class="food-calories">120 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('begun-bhaja')">-</button>
+                <input type="number" id="begun-bhaja" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('begun-bhaja')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Lau Chingri (100g)</div>
+                <div class="food-calories">140 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('lau-chingri')">-</button>
+                <input type="number" id="lau-chingri" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('lau-chingri')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Chingri Malai Curry (100g)</div>
+                <div class="food-calories">220 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('chingri-malai')">-</button>
+                <input type="number" id="chingri-malai" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('chingri-malai')">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sweets & Desserts -->
+          <div class="category-card">
+            <h3 class="category-title">🍰 Sweets & Desserts</h3>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Rasgulla (1 piece)</div>
+                <div class="food-calories">150 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('rasgulla')">-</button>
+                <input type="number" id="rasgulla" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('rasgulla')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Sandesh (1 piece)</div>
+                <div class="food-calories">120 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('sandesh')">-</button>
+                <input type="number" id="sandesh" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('sandesh')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Gulab Jamun (1 piece)</div>
+                <div class="food-calories">180 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('gulab-jamun')">-</button>
+                <input type="number" id="gulab-jamun" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('gulab-jamun')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Mishti Doi (100g)</div>
+                <div class="food-calories">200 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('mishti-doi')">-</button>
+                <input type="number" id="mishti-doi" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('mishti-doi')">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Snacks & Street Food -->
+          <div class="category-card">
+            <h3 class="category-title">🍟 Snacks & Street Food</h3>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Jhalmuri (1 cup)</div>
+                <div class="food-calories">180 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('jhalmuri')">-</button>
+                <input type="number" id="jhalmuri" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('jhalmuri')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Phuchka (5 pieces)</div>
+                <div class="food-calories">120 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('phuchka')">-</button>
+                <input type="number" id="phuchka" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('phuchka')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Singara (1 piece)</div>
+                <div class="food-calories">150 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('singara')">-</button>
+                <input type="number" id="singara" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('singara')">+</button>
+              </div>
+            </div>
+            <div class="food-item">
+              <div>
+                <div class="food-name">Samosa (1 piece)</div>
+                <div class="food-calories">200 calories</div>
+              </div>
+              <div class="quantity-input">
+                <button onclick="decreaseQuantity('samosa')">-</button>
+                <input type="number" id="samosa" value="0" min="0" onchange="updateCalories()">
+                <button onclick="increaseQuantity('samosa')">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button class="btn-clear" onclick="clearAll()">Clear All</button>
+          <button class="btn-save" onclick="saveCalories()">Save to Dashboard</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="scripts/bengali-calorie-calculator.js"></script>
+</body>
+</html>

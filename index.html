@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Optimized Fitness Journey</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-flex">
+      <a href="#" class="logo" aria-label="Hercules Pro Home">
+        <img src="assets/hercules-pro-logo.jpg.png" alt="Hercules Pro Logo" class="logo-img" style="height: 2.2rem; width: auto; vertical-align: middle; margin-right: 0.5rem;">
+        <span class="logo-text">Hercules Pro</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#service">Service</a></li>
+          <li><a href="#how-it-works">How it Works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </nav>
+      <div id="account-area"></div>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Welcome to the perfect place for enhancing your fitness and wellbeing</h1>
+        <p>Get your desired fitness goal by us, make it a best investment on you wishing you a very best journey with us</p>
+        <a href="register.html" class="btn btn-primary">Let's Start</a>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1517960413843-0aee8e2d471c?auto=format&fit=crop&w=800&q=80" alt="" aria-hidden="true" class="hero-img-decorative">
+      </div>
+    </section>
+    <section class="features" id="service">
+      <div class="container">
+        <h2>Boost Your Routine<br>With AI Insights</h2>
+        <p class="features-desc">Boost Your Fitness With AI-Powered Workouts. Enjoy Personalized Meals Tailored To You.</p>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon"></div>
+            <h3>Training Plan</h3>
+            <p>Workouts Tailored To Your Goals For Optimal Results.</p>
+            <a href="training-programs.html" class="btn btn-secondary">Start Plan</a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"></div>
+            <h3>Smart Meal Plans</h3>
+            <p>Nutrition Tailored To Your Lifestyle And Goals For Optimal Results.</p>
+            <a href="meal-plans.html" class="btn btn-secondary">See Meal</a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"></div>
+            <h3>Smart Calorie Counter</h3>
+            <p>Track Your Daily Calorie Intake With Bengali Food Database & AI Insights.</p>
+            <a href="bengali-calorie-calculator.html" class="btn btn-secondary">Count Calories</a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"></div>
+            <h3>Product Marketplace</h3>
+            <p>Discover Fitness Products & Services From Professional Trainers.</p>
+            <a href="product-marketplace.html" class="btn btn-secondary">Browse Products</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Community & Workout Tracker Section -->
+    <section class="community-workout-section">
+      <div class="container">
+        <div class="community-workout-grid">
+          <!-- Community Feature -->
+          <div class="community-feature">
+            <h2>Fitness Community</h2>
+            <p>Connect with fellow fitness enthusiasts, share your journey, and get inspired by others</p>
+            <div class="community-preview">
+              <div class="community-stats">
+                <div class="stat-item">
+                  <span class="stat-number" id="totalPosts">0</span>
+                  <span class="stat-label">Posts</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number" id="totalLikes">0</span>
+                  <span class="stat-label">Likes</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number" id="totalViews">0</span>
+                  <span class="stat-label">Views</span>
+                </div>
+              </div>
+              <div class="community-actions">
+                <a href="community.html" class="btn btn-primary">Join Community</a>
+                <a href="community.html" class="btn btn-secondary">View Posts</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Daily Workout Goal Tracker -->
+          <div class="workout-tracker">
+            <h2>Daily Workout Goals</h2>
+            <p>Set your daily workout goals and track your progress automatically</p>
+            <div class="goal-tracker">
+              <div class="goal-input-section">
+                <h4>Set Today's Goals</h4>
+                <div class="goal-inputs">
+                  <div class="goal-input-group">
+                    <label for="workoutDuration">Workout Duration (min)</label>
+                    <input type="number" id="workoutDuration" min="15" max="180" value="45">
+                  </div>
+                  <div class="goal-input-group">
+                    <label for="workoutType">Workout Type</label>
+                    <select id="workoutType">
+                      <option value="cardio">Cardio</option>
+                      <option value="strength">Strength Training</option>
+                      <option value="flexibility">Flexibility</option>
+                      <option value="mixed">Mixed</option>
+                    </select>
+                  </div>
+                  <div class="goal-input-group">
+                    <label for="intensityLevel">Intensity Level</label>
+                    <select id="intensityLevel">
+                      <option value="low">Low</option>
+                      <option value="moderate">Moderate</option>
+                      <option value="high">High</option>
+                    </select>
+                  </div>
+                </div>
+                <button class="btn btn-primary" onclick="setWorkoutGoals()">Set Goals</button>
+              </div>
+              
+              <div class="goal-progress">
+                <h4>Today's Progress</h4>
+                <div class="progress-cards">
+                  <div class="progress-card">
+                    <div class="progress-icon">Duration</div>
+                    <div class="progress-info">
+                      <span class="progress-label">Duration</span>
+                      <span class="progress-value" id="currentDuration">0</span>
+                      <span class="progress-unit">/ <span id="targetDuration">45</span> min</span>
+                    </div>
+                    <div class="progress-bar">
+                      <div class="progress-fill" id="durationProgress"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="progress-card">
+                    <div class="progress-icon">Calories</div>
+                    <div class="progress-info">
+                      <span class="progress-label">Calories Burned</span>
+                      <span class="progress-value" id="caloriesBurned">0</span>
+                      <span class="progress-unit">cal</span>
+                    </div>
+                    <div class="progress-bar">
+                      <div class="progress-fill" id="caloriesProgress"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="progress-card">
+                    <div class="progress-icon">Progress</div>
+                    <div class="progress-info">
+                      <span class="progress-label">Goal Completion</span>
+                      <span class="progress-value" id="goalCompletion">0</span>
+                      <span class="progress-unit">%</span>
+                    </div>
+                    <div class="progress-bar">
+                      <div class="progress-fill" id="completionProgress"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="workout-actions">
+                  <button class="btn btn-secondary" onclick="startWorkout()">Start Workout</button>
+                  <button class="btn btn-primary" onclick="completeWorkout()">Complete Workout</button>
+                  <button class="btn btn-secondary" onclick="resetProgress()">Reset Progress</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <aside class="side-features">
+      <div class="side-feature-block">
+        <h2>Transform Your Fitness Journey In A Smarter Way</h2>
+        <div class="side-feature-list">
+          <div class="side-feature-item">
+            <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80" alt="AI powered fitness trainer">
+            <div>
+              <h4>AI Powered Fitness Trainer</h4>
+              <p>Personalized Workouts Adapt As You Progress.</p>
+              <a href="#" class="btn btn-link">See more</a>
+            </div>
+          </div>
+          <div class="side-feature-item">
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=400&q=80" alt="Diet and workout guide">
+            <div>
+              <h4>Diet &amp; Workout Guide</h4>
+              <p>Get Custom Meal &amp; Workout Plans Backed By AI.</p>
+              <a href="#" class="btn btn-link">Find out</a>
+            </div>
+          </div>
+          <div class="side-feature-item">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Unique routines and health metrics">
+            <div>
+              <h4>Unique Routines &amp; Health Metrics</h4>
+              <p>Advanced Progress Tracking.</p>
+              <a href="#" class="btn btn-link">See more</a>
+            </div>
+          </div>
+        </div>
+        <a href="register.html" class="btn btn-primary">Start Now</a>
+      </div>
+    </aside>
+    <section class="plans" id="pricing">
+      <div class="container">
+        <h2>Perfect Plan For Your Fitness Goals</h2>
+        <p>Choose The Perfect Plan That Fits Your Fitness Goals And Start Your Journey Today.</p>
+        <div class="plans-grid">
+          <div class="plan-card">
+            <h3>Basic Plan</h3>
+            <div class="plan-price">৳19.99/<span>mo</span></div>
+            <ul>
+              <li>AI Workout Plans</li>
+              <li>Basic Meal Guide</li>
+              <li>Progress Tracker</li>
+            </ul>
+            <a href="#" class="btn btn-secondary">Choose Plan</a>
+          </div>
+          <div class="plan-card plan-card--pro">
+            <h3>Pro Plan</h3>
+            <div class="plan-price">৳39.99/<span>mo</span></div>
+            <ul>
+              <li>Everything in Basic</li>
+              <li>Personalized Meal Plans</li>
+              <li>Advanced Progress Analytics</li>
+              <li>Priority Support</li>
+            </ul>
+            <a href="#" class="btn btn-primary">Choose Plan</a>
+          </div>
+          <div class="plan-card">
+            <h3>Elite Plan</h3>
+            <div class="plan-price">৳79.99/<span>mo</span></div>
+            <ul>
+              <li>All Pro Features</li>
+              <li>1-on-1 AI Coach</li>
+              <li>Exclusive Content</li>
+              <li>Early Access to New Features</li>
+            </ul>
+            <a href="#" class="btn btn-secondary">Choose Plan</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p>2025 Hercules Pro</p>
+    </div>
+  </footer>
+  <script src="scripts/main.js"></script>
+</body>
+</html> 

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Dashboard - Hercules Pro</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="logo" aria-label="Hercules Pro Home">
+          <img src="assets/hercules-pro-logo.jpg.png" alt="Hercules Pro Logo" class="logo-img">
+          <span class="logo-text">Hercules Pro</span>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item active">
+            <a href="#dashboard" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="product-management.html" class="nav-link">
+              <span class="nav-icon">🛍️</span>
+              <span>Products</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#clients" class="nav-link">
+              <span class="nav-icon">👥</span>
+              <span>Clients</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#workouts" class="nav-link">
+              <span class="nav-icon">💪</span>
+              <span>Workouts</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#nutrition" class="nav-link">
+              <span class="nav-icon">🥗</span>
+              <span>Nutrition Plans</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#analytics" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Analytics</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#schedule" class="nav-link">
+              <span class="nav-icon">📅</span>
+              <span>Schedule</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#profile" class="nav-link">
+              <span class="nav-icon">👤</span>
+              <span>Profile</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button class="btn btn-secondary logout-btn" onclick="logout()">
+          <span class="nav-icon">🚪</span>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="header-left">
+          <h1>Welcome back, <span id="userName">Trainer</span>! 💪</h1>
+          <p>Manage your clients and create amazing workouts</p>
+        </div>
+        <div class="header-right">
+          <div class="user-info">
+            <span class="user-avatar">💪</span>
+            <div class="user-details">
+              <span class="user-name" id="userNameHeader">Trainer Name</span>
+              <span class="user-role">Professional Trainer</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Content -->
+      <div class="dashboard-content">
+        <!-- Stats Cards -->
+        <section class="stats-section">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">👥</div>
+              <div class="stat-content">
+                <h3>Active Clients</h3>
+                <p class="stat-value">24</p>
+                <p class="stat-change positive">+3 this month</p>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon">💪</div>
+              <div class="stat-content">
+                <h3>Workouts Created</h3>
+                <p class="stat-value">156</p>
+                <p class="stat-change positive">+12 this week</p>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon">⭐</div>
+              <div class="stat-content">
+                <h3>Client Rating</h3>
+                <p class="stat-value">4.8/5</p>
+                <p class="stat-change positive">+0.2 this month</p>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon">💰</div>
+              <div class="stat-content">
+                <h3>Monthly Revenue</h3>
+                <p class="stat-value">$3,240</p>
+                <p class="stat-change positive">+15% from last month</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Recent Clients -->
+        <section class="clients-section">
+          <div class="section-header">
+            <h2>Recent Client Activity</h2>
+            <button class="btn btn-primary">View All Clients</button>
+          </div>
+          
+          <div class="clients-grid">
+            <div class="client-card">
+              <div class="client-avatar">👤</div>
+              <div class="client-info">
+                <h4>Sarah Johnson</h4>
+                <p>Weight Loss • 3 months</p>
+                <div class="client-progress">
+                  <span class="progress-label">Progress:</span>
+                  <span class="progress-value">-12 lbs</span>
+                </div>
+              </div>
+              <div class="client-status online">Online</div>
+            </div>
+            
+            <div class="client-card">
+              <div class="client-avatar">👤</div>
+              <div class="client-info">
+                <h4>Mike Chen</h4>
+                <p>Muscle Gain • 2 months</p>
+                <div class="client-progress">
+                  <span class="progress-label">Progress:</span>
+                  <span class="progress-value">+8 lbs</span>
+                </div>
+              </div>
+              <div class="client-status offline">Offline</div>
+            </div>
+            
+            <div class="client-card">
+              <div class="client-avatar">👤</div>
+              <div class="client-info">
+                <h4>Emma Davis</h4>
+                <p>General Fitness • 1 month</p>
+                <div class="client-progress">
+                  <span class="progress-label">Progress:</span>
+                  <span class="progress-value">+5 lbs</span>
+                </div>
+              </div>
+              <div class="client-status online">Online</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="actions-section">
+          <div class="section-header">
+            <h2>Quick Actions</h2>
+          </div>
+          
+          <div class="actions-grid">
+            <div class="action-card">
+              <div class="action-icon">➕</div>
+              <h4>Add New Client</h4>
+              <p>Register a new client and create their profile</p>
+              <button class="btn btn-primary">Add Client</button>
+            </div>
+            
+            <div class="action-card">
+              <div class="action-icon">💪</div>
+              <h4>Create Workout</h4>
+              <p>Design a new workout plan for your clients</p>
+              <button class="btn btn-primary">Create Workout</button>
+            </div>
+            
+            <div class="action-card">
+              <div class="action-icon">🥗</div>
+              <h4>Nutrition Plan</h4>
+              <p>Create personalized meal plans</p>
+              <button class="btn btn-primary">Create Plan</button>
+            </div>
+            
+            <div class="action-card">
+              <div class="action-icon">📅</div>
+              <h4>Schedule Session</h4>
+              <p>Book a training session with a client</p>
+              <button class="btn btn-primary">Schedule</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Today's Schedule -->
+        <section class="schedule-section">
+          <div class="section-header">
+            <h2>Today's Schedule</h2>
+            <button class="btn btn-secondary">View Full Schedule</button>
+          </div>
+          
+          <div class="schedule-timeline">
+            <div class="schedule-item">
+              <div class="time-slot">09:00 AM</div>
+              <div class="session-info">
+                <h4>Sarah Johnson - Weight Training</h4>
+                <p>Upper body focus, 45 minutes</p>
+              </div>
+              <div class="session-status upcoming">Upcoming</div>
+            </div>
+            
+            <div class="schedule-item">
+              <div class="time-slot">10:30 AM</div>
+              <div class="session-info">
+                <h4>Mike Chen - Cardio Session</h4>
+                <p>HIIT training, 30 minutes</p>
+              </div>
+              <div class="session-status completed">Completed</div>
+            </div>
+            
+            <div class="schedule-item">
+              <div class="time-slot">02:00 PM</div>
+              <div class="session-info">
+                <h4>Emma Davis - Flexibility</h4>
+                <p>Yoga and stretching, 60 minutes</p>
+              </div>
+              <div class="session-status upcoming">Upcoming</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Performance Analytics -->
+        <section class="analytics-section">
+          <div class="section-header">
+            <h2>Client Performance Analytics</h2>
+            <div class="chart-controls">
+              <button class="btn btn-secondary active">This Week</button>
+              <button class="btn btn-secondary">This Month</button>
+              <button class="btn btn-secondary">This Year</button>
+            </div>
+          </div>
+          
+          <div class="analytics-grid">
+            <div class="analytics-card">
+              <h4>Client Retention Rate</h4>
+              <div class="analytics-value">94%</div>
+              <div class="analytics-chart">
+                <canvas id="retentionChart" width="200" height="100"></canvas>
+              </div>
+            </div>
+            
+            <div class="analytics-card">
+              <h4>Average Client Progress</h4>
+              <div class="analytics-value">+8.5 lbs</div>
+              <div class="analytics-chart">
+                <canvas id="progressChart" width="200" height="100"></canvas>
+              </div>
+            </div>
+            
+            <div class="analytics-card">
+              <h4>Workout Completion Rate</h4>
+              <div class="analytics-value">87%</div>
+              <div class="analytics-chart">
+                <canvas id="completionChart" width="200" height="100"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="scripts/dashboard-professional.js"></script>
+</body>
+</html> 

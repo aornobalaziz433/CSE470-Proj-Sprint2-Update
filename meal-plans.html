@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plans - Hercules Pro</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="styles/meal-plans.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo" aria-label="Hercules Pro Home">
+                    <img src="assets/hercules-pro-logo.jpg.png" alt="Hercules Pro Logo" class="logo-img">
+                    <span class="logo-text">Hercules Pro</span>
+                </a>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <a href="dashboard-client.html" class="nav-link">
+                            <span class="nav-icon">📊</span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#workouts" class="nav-link">
+                            <span class="nav-icon">💪</span>
+                            <span>Workouts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="meal-plans.html" class="nav-link">
+                            <span class="nav-icon">🥗</span>
+                            <span>Nutrition</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#progress" class="nav-link">
+                            <span class="nav-icon">📈</span>
+                            <span>Progress</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#ai-coach" class="nav-link">
+                            <span class="nav-icon">🤖</span>
+                            <span>AI Coach</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#profile" class="nav-link">
+                            <span class="nav-icon">👤</span>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn btn-secondary logout-btn" onclick="logout()">
+                    <span class="nav-icon">🚪</span>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Smart Meal Plans 🥗</h1>
+                    <p>Nutrition tailored to your lifestyle and goals for optimal results</p>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span class="user-avatar">👤</span>
+                        <div class="user-details">
+                            <span class="user-name" id="userName">Client</span>
+                            <span class="user-role">Client</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Meal Plan Content -->
+            <div class="dashboard-content" id="mealPlanContent">
+                <!-- Content will be dynamically loaded by JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts/meal-plans.js"></script>
+</body>
+</html> 

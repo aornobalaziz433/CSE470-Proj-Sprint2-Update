@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management - Hercules Pro</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    .product-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .product-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .product-header h1 {
+      color: #2c1810;
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    
+    .product-header p {
+      color: #666;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .product-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .tab-btn {
+      background: white;
+      border: 2px solid #e5e5e5;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #666;
+      transition: all 0.3s ease;
+    }
+    
+    .tab-btn.active {
+      background: #f5e9da;
+      border-color: #f5e9da;
+      color: #2c1810;
+    }
+    
+    .tab-btn:hover {
+      border-color: #f5e9da;
+      color: #2c1810;
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .add-product-section {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e5e5;
+      margin-bottom: 2rem;
+    }
+    
+    .add-product-section h3 {
+      color: #2c1810;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+    }
+    
+    .product-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+    
+    .form-group label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.2s ease;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #f5e9da;
+      box-shadow: 0 0 0 2px rgba(245, 233, 218, 0.3);
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .image-upload {
+      border: 2px dashed #ddd;
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .image-upload:hover {
+      border-color: #f5e9da;
+      background-color: #fafafa;
+    }
+    
+    .image-upload.dragover {
+      border-color: #f5e9da;
+      background-color: #f5e9da;
+    }
+    
+    .image-preview {
+      max-width: 200px;
+      max-height: 200px;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    
+    .add-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+      grid-column: 1 / -1;
+    }
+    
+    .add-btn:hover {
+      background: #218838;
+    }
+    
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e5e5;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .product-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+    }
+    
+    .product-info {
+      padding: 1.5rem;
+    }
+    
+    .product-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c1810;
+      margin-bottom: 0.5rem;
+    }
+    
+    .product-description {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    
+    .product-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #28a745;
+      margin-bottom: 1rem;
+    }
+    
+    .product-category {
+      display: inline-block;
+      background: #f5e9da;
+      color: #2c1810;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .product-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .edit-btn {
+      background: #17a2b8;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.2s ease;
+    }
+    
+    .edit-btn:hover {
+      background: #138496;
+    }
+    
+    .delete-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.2s ease;
+    }
+    
+    .delete-btn:hover {
+      background: #c82333;
+    }
+    
+    .stats-section {
+      background: linear-gradient(135deg, #f5e9da, #e8d5c0);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2c1810;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .btn-export {
+      background: #17a2b8;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-export:hover {
+      background: #138496;
+      transform: translateY(-1px);
+    }
+    
+    @media (max-width: 768px) {
+      .product-form {
+        grid-template-columns: 1fr;
+      }
+      
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="logo" aria-label="Hercules Pro Home">
+          <img src="assets/hercules-pro-logo.jpg.png" alt="Hercules Pro Logo" class="logo-img">
+          <span class="logo-text">Hercules Pro</span>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item">
+            <a href="dashboard-professional.html" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a href="product-management.html" class="nav-link">
+              <span class="nav-icon">🛍️</span>
+              <span>Products</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#clients" class="nav-link">
+              <span class="nav-icon">👥</span>
+              <span>Clients</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#workouts" class="nav-link">
+              <span class="nav-icon">💪</span>
+              <span>Workouts</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#nutrition" class="nav-link">
+              <span class="nav-icon">🥗</span>
+              <span>Nutrition Plans</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#analytics" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Analytics</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#schedule" class="nav-link">
+              <span class="nav-icon">📅</span>
+              <span>Schedule</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#profile" class="nav-link">
+              <span class="nav-icon">👤</span>
+              <span>Profile</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button class="btn btn-secondary logout-btn" onclick="logout()">
+          <span class="nav-icon">🚪</span>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="product-container">
+        <a href="dashboard-professional.html" class="back-btn">← Back to Dashboard</a>
+        
+        <div class="product-header">
+          <h1>🛍️ Product Management</h1>
+          <p>Promote your fitness products and services to reach more clients</p>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-value" id="totalProducts">0</div>
+              <div class="stat-label">Total Products</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="activeProducts">0</div>
+              <div class="stat-label">Active Products</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="totalViews">0</div>
+              <div class="stat-label">Total Views</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="totalRevenue">৳0</div>
+              <div class="stat-label">Total Revenue</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="product-tabs">
+          <button class="tab-btn active" onclick="showTab('add-product')">Add Product</button>
+          <button class="tab-btn" onclick="showTab('my-products')">My Products</button>
+          <button class="tab-btn" onclick="showTab('analytics')">Analytics</button>
+        </div>
+
+        <!-- Add Product Tab -->
+        <div class="tab-content active" id="add-product">
+          <div class="add-product-section">
+            <h3>Add New Product</h3>
+            <form class="product-form" id="productForm">
+              <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" id="productName" placeholder="e.g., Premium Protein Powder" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="productPrice">Price (৳)</label>
+                <input type="number" id="productPrice" placeholder="e.g., 1500" required min="0">
+              </div>
+              
+              <div class="form-group">
+                <label for="productCategory">Category</label>
+                <select id="productCategory" required>
+                  <option value="">Select Category</option>
+                  <option value="supplements">Supplements</option>
+                  <option value="equipment">Fitness Equipment</option>
+                  <option value="clothing">Workout Clothing</option>
+                  <option value="nutrition">Nutrition Products</option>
+                  <option value="services">Training Services</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="productStock">Stock Quantity</label>
+                <input type="number" id="productStock" placeholder="e.g., 50" required min="0">
+              </div>
+              
+              <div class="form-group full-width">
+                <label for="productDescription">Description</label>
+                <textarea id="productDescription" placeholder="Describe your product in detail..." required></textarea>
+              </div>
+              
+              <div class="form-group full-width">
+                <label for="productImage">Product Image</label>
+                <div class="image-upload" id="imageUpload" onclick="document.getElementById('imageInput').click()">
+                  <div id="uploadText">
+                    <span style="font-size: 2rem;">📷</span>
+                    <p>Click to upload image or drag and drop</p>
+                    <p style="font-size: 0.8rem; color: #666;">PNG, JPG up to 5MB</p>
+                  </div>
+                  <img id="imagePreview" class="image-preview" style="display: none;">
+                </div>
+                <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+              </div>
+              
+              <button type="submit" class="add-btn">Add Product</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- My Products Tab -->
+        <div class="tab-content" id="my-products">
+          <div class="products-grid" id="productsGrid">
+            <!-- Products will be loaded here dynamically -->
+          </div>
+        </div>
+
+        <!-- Analytics Tab -->
+        <div class="tab-content" id="analytics">
+          <div class="add-product-section">
+            <h3>Product Performance Analytics</h3>
+            <div style="text-align: center; padding: 3rem; color: #666;">
+              <span style="font-size: 3rem;">📊</span>
+              <p>Analytics dashboard coming soon...</p>
+              <p>Track your product performance, views, and sales data.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button class="btn-export" onclick="exportProducts()">Export Products</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="scripts/product-management.js"></script>
+</body>
+</html>

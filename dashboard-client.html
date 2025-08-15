@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Dashboard - Hercules Pro</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="logo" aria-label="Hercules Pro Home">
+          <img src="assets/hercules-pro-logo.jpg.png" alt="Hercules Pro Logo" class="logo-img">
+          <span class="logo-text">Hercules Pro</span>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item active">
+            <a href="dashboard-client.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="training-programs.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Training Programs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="meal-plans.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Nutrition</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="calorie-tracker.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Calorie Counter</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="bengali-calorie-calculator.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Bengali Foods</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="product-marketplace.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Marketplace</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="community.html" class="nav-link">
+              <span class="nav-icon">Community</span>
+              <span>Community</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#progress" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Progress</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#ai-coach" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>AI Coach</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#profile" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Profile</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button class="btn btn-secondary logout-btn" onclick="logout()">
+          <span class="nav-icon"></span>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="header-left">
+                      <h1>Welcome back, <span id="userName">Client</span>!</h1>
+          <p>Let's crush your fitness goals today</p>
+        </div>
+        <div class="header-right">
+          <div class="user-info">
+            <span class="user-avatar"></span>
+            <div class="user-details">
+              <span class="user-name" id="userNameHeader">Client Name</span>
+              <span class="user-role">Client</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Content -->
+      <div class="dashboard-content">
+        <!-- Stats Cards -->
+        <section class="stats-section">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon"></div>
+              <div class="stat-content">
+                <h3>Calories Burned</h3>
+                <p class="stat-value">1,247</p>
+                <p class="stat-change positive">+12% from yesterday</p>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon"></div>
+              <div class="stat-content">
+                <h3>Workout Time</h3>
+                <p class="stat-value">45 min</p>
+                <p class="stat-change positive">+5 min from yesterday</p>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon"></div>
+              <div class="stat-content">
+                <h3>Goals Completed</h3>
+                <p class="stat-value">3/5</p>
+                <p class="stat-change">60% of daily goals</p>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon"></div>
+              <div class="stat-content">
+                <h3>Current Weight</h3>
+                <p class="stat-value">165 lbs</p>
+                <p class="stat-change negative">-2 lbs this week</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Today's Workout -->
+        <section class="workout-section">
+          <div class="section-header">
+            <h2>Today's AI-Optimized Workout</h2>
+            <button class="btn btn-primary">Start Workout</button>
+          </div>
+          
+          <div class="workout-card">
+            <div class="workout-info">
+              <h3>Upper Body Strength + Cardio</h3>
+              <p>Duration: 45 minutes | Difficulty: Intermediate</p>
+              <div class="workout-tags">
+                <span class="tag">Strength</span>
+                <span class="tag">Cardio</span>
+                <span class="tag">Upper Body</span>
+              </div>
+            </div>
+            
+            <div class="workout-exercises">
+              <h4>Exercises:</h4>
+              <ul>
+                <li>Push-ups: 3 sets x 12 reps</li>
+                <li>Dumbbell Rows: 3 sets x 10 reps</li>
+                <li>Shoulder Press: 3 sets x 8 reps</li>
+                <li>Plank: 3 sets x 30 seconds</li>
+                <li>Jumping Jacks: 3 sets x 20 reps</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Nutrition Plan -->
+        <section class="nutrition-section">
+          <div class="section-header">
+            <h2>Today's Meal Plan</h2>
+            <button class="btn btn-secondary">View Full Plan</button>
+          </div>
+          
+          <div class="nutrition-grid">
+            <div class="meal-card">
+              <div class="meal-header">
+                <span class="meal-icon">🌅</span>
+                <h4>Breakfast</h4>
+              </div>
+              <p>Oatmeal with berries and nuts</p>
+              <span class="calories">320 cal</span>
+            </div>
+            
+            <div class="meal-card">
+              <div class="meal-header">
+                <span class="meal-icon">☀️</span>
+                <h4>Lunch</h4>
+              </div>
+              <p>Grilled chicken salad</p>
+              <span class="calories">450 cal</span>
+            </div>
+            
+            <div class="meal-card">
+              <div class="meal-header">
+                <span class="meal-icon">🌙</span>
+                <h4>Dinner</h4>
+              </div>
+              <p>Salmon with quinoa</p>
+              <span class="calories">520 cal</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Progress Chart -->
+        <section class="progress-section">
+          <div class="section-header">
+            <h2>Weekly Progress</h2>
+            <div class="chart-controls">
+              <button class="btn btn-secondary active">Weight</button>
+              <button class="btn btn-secondary">Workouts</button>
+              <button class="btn btn-secondary">Calories</button>
+            </div>
+          </div>
+          
+          <div class="progress-chart">
+            <canvas id="progressChart" width="400" height="200"></canvas>
+          </div>
+        </section>
+
+        <!-- AI Recommendations -->
+        <section class="ai-section">
+          <div class="section-header">
+            <h2>AI Coach Recommendations</h2>
+          </div>
+          
+          <div class="ai-recommendations">
+            <div class="ai-card">
+              <div class="ai-icon">💡</div>
+              <div class="ai-content">
+                <h4>Hydration Alert</h4>
+                <p>You're 20% below your daily water goal. Try drinking 2 more glasses today!</p>
+              </div>
+            </div>
+            
+            <div class="ai-card">
+              <div class="ai-icon">AI</div>
+              <div class="ai-content">
+                <h4>Goal Adjustment</h4>
+                <p>Based on your progress, consider increasing your workout intensity by 10%.</p>
+              </div>
+            </div>
+            
+            <div class="ai-card">
+              <div class="ai-icon">🍎</div>
+              <div class="ai-content">
+                <h4>Nutrition Tip</h4>
+                <p>Add more protein to your lunch to support muscle recovery after your morning workout.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="scripts/dashboard-client.js"></script>
+</body>
+</html> 

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Hercules Pro</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="logo" aria-label="Hercules Pro Home">
+          <img src="assets/hercules-pro-logo.jpg.png" alt="Hercules Pro Logo" class="logo-img">
+          <span class="logo-text">Hercules Pro</span>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item active">
+            <a href="#dashboard" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#users" class="nav-link">
+              <span class="nav-icon">👥</span>
+              <span>User Management</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#professionals" class="nav-link">
+              <span class="nav-icon">💪</span>
+              <span>Professionals</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#clients" class="nav-link">
+              <span class="nav-icon">👤</span>
+              <span>Clients</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#analytics" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Analytics</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#system" class="nav-link">
+              <span class="nav-icon">⚙️</span>
+              <span>System</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#settings" class="nav-link">
+              <span class="nav-icon">🔧</span>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button class="btn btn-secondary logout-btn" onclick="logout()">
+          <span class="nav-icon">🚪</span>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="header-left">
+          <h1>Admin Dashboard ⚙️</h1>
+          <p>System overview and management</p>
+        </div>
+        <div class="header-right">
+          <div class="user-info">
+            <span class="user-avatar">⚙️</span>
+            <div class="user-details">
+              <span class="user-name" id="userNameHeader">Admin</span>
+              <span class="user-role">System Administrator</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Content -->
+      <div class="dashboard-content">
+        <!-- System Stats -->
+        <section class="stats-section">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">👥</div>
+              <div class="stat-content">
+                <h3>Total Users</h3>
+                <p class="stat-value">1,247</p>
+                <p class="stat-change positive">+23 this week</p>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon">💪</div>
+              <div class="stat-content">
+                <h3>Active Professionals</h3>
+                <p class="stat-value">156</p>
+                <p class="stat-change positive">+8 this month</p>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon">👤</div>
+              <div class="stat-content">
+                <h3>Active Clients</h3>
+                <p class="stat-value">1,091</p>
+                <p class="stat-change positive">+15 this week</p>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon">💰</div>
+              <div class="stat-content">
+                <h3>Monthly Revenue</h3>
+                <p class="stat-value">$45,230</p>
+                <p class="stat-change positive">+12% from last month</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- System Health -->
+        <section class="system-section">
+          <div class="section-header">
+            <h2>System Health</h2>
+            <button class="btn btn-secondary">View Details</button>
+          </div>
+          
+          <div class="system-grid">
+            <div class="system-card healthy">
+              <div class="system-icon">🟢</div>
+              <div class="system-info">
+                <h4>Server Status</h4>
+                <p>All systems operational</p>
+                <span class="system-status">Healthy</span>
+              </div>
+            </div>
+            
+            <div class="system-card healthy">
+              <div class="system-icon">🟢</div>
+              <div class="system-info">
+                <h4>Database</h4>
+                <p>Response time: 45ms</p>
+                <span class="system-status">Optimal</span>
+              </div>
+            </div>
+            
+            <div class="system-card warning">
+              <div class="system-icon">🟡</div>
+              <div class="system-info">
+                <h4>Storage</h4>
+                <p>75% of capacity used</p>
+                <span class="system-status">Warning</span>
+              </div>
+            </div>
+            
+            <div class="system-card healthy">
+              <div class="system-icon">🟢</div>
+              <div class="system-info">
+                <h4>AI Services</h4>
+                <p>All models active</p>
+                <span class="system-status">Online</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Recent Activity -->
+        <section class="activity-section">
+          <div class="section-header">
+            <h2>Recent System Activity</h2>
+            <button class="btn btn-primary">View All Logs</button>
+          </div>
+          
+          <div class="activity-timeline">
+            <div class="activity-item">
+              <div class="activity-time">2 min ago</div>
+              <div class="activity-info">
+                <h4>New Professional Registration</h4>
+                <p>John Smith registered as a fitness trainer</p>
+              </div>
+              <div class="activity-status info">Info</div>
+            </div>
+            
+            <div class="activity-item">
+              <div class="activity-time">15 min ago</div>
+              <div class="activity-info">
+                <h4>System Backup Completed</h4>
+                <p>Daily backup completed successfully</p>
+              </div>
+              <div class="activity-status success">Success</div>
+            </div>
+            
+            <div class="activity-item">
+              <div class="activity-time">1 hour ago</div>
+              <div class="activity-info">
+                <h4>User Account Suspended</h4>
+                <p>Account #1234 suspended for policy violation</p>
+              </div>
+              <div class="activity-status warning">Warning</div>
+            </div>
+            
+            <div class="activity-item">
+              <div class="activity-time">3 hours ago</div>
+              <div class="activity-info">
+                <h4>AI Model Update</h4>
+                <p>Workout recommendation model updated to v2.1</p>
+              </div>
+              <div class="activity-status success">Success</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="actions-section">
+          <div class="section-header">
+            <h2>Administrative Actions</h2>
+          </div>
+          
+          <div class="actions-grid">
+            <div class="action-card">
+              <div class="action-icon">👥</div>
+              <h4>User Management</h4>
+              <p>View, edit, and manage user accounts</p>
+              <button class="btn btn-primary">Manage Users</button>
+            </div>
+            
+            <div class="action-card">
+              <div class="action-icon">📊</div>
+              <h4>System Analytics</h4>
+              <p>View detailed system performance metrics</p>
+              <button class="btn btn-primary">View Analytics</button>
+            </div>
+            
+            <div class="action-card">
+              <div class="action-icon">🔧</div>
+              <h4>System Settings</h4>
+              <p>Configure system parameters and preferences</p>
+              <button class="btn btn-primary">Settings</button>
+            </div>
+            
+            <div class="action-card">
+              <div class="action-icon">📋</div>
+              <h4>Reports</h4>
+              <p>Generate and view system reports</p>
+              <button class="btn btn-primary">Generate Report</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Platform Analytics -->
+        <section class="analytics-section">
+          <div class="section-header">
+            <h2>Platform Analytics</h2>
+            <div class="chart-controls">
+              <button class="btn btn-secondary active">Today</button>
+              <button class="btn btn-secondary">This Week</button>
+              <button class="btn btn-secondary">This Month</button>
+            </div>
+          </div>
+          
+          <div class="analytics-grid">
+            <div class="analytics-card">
+              <h4>User Growth</h4>
+              <div class="analytics-value">+15%</div>
+              <div class="analytics-chart">
+                <canvas id="growthChart" width="200" height="100"></canvas>
+              </div>
+            </div>
+            
+            <div class="analytics-card">
+              <h4>Revenue Growth</h4>
+              <div class="analytics-value">+23%</div>
+              <div class="analytics-chart">
+                <canvas id="revenueChart" width="200" height="100"></canvas>
+              </div>
+            </div>
+            
+            <div class="analytics-card">
+              <h4>User Retention</h4>
+              <div class="analytics-value">89%</div>
+              <div class="analytics-chart">
+                <canvas id="retentionChart" width="200" height="100"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pending Approvals -->
+        <section class="approvals-section">
+          <div class="section-header">
+            <h2>Pending Approvals</h2>
+            <button class="btn btn-secondary">View All</button>
+          </div>
+          
+          <div class="approvals-grid">
+            <div class="approval-card">
+              <div class="approval-header">
+                <h4>Professional Verification</h4>
+                <span class="approval-type">Certification</span>
+              </div>
+              <p>Sarah Johnson - Personal Trainer Certification</p>
+              <div class="approval-actions">
+                <button class="btn btn-primary">Approve</button>
+                <button class="btn btn-secondary">Reject</button>
+              </div>
+            </div>
+            
+            <div class="approval-card">
+              <div class="approval-header">
+                <h4>Content Review</h4>
+                <span class="approval-type">Workout Plan</span>
+              </div>
+              <p>Advanced HIIT Workout by Mike Chen</p>
+              <div class="approval-actions">
+                <button class="btn btn-primary">Approve</button>
+                <button class="btn btn-secondary">Reject</button>
+              </div>
+            </div>
+            
+            <div class="approval-card">
+              <div class="approval-header">
+                <h4>Account Review</h4>
+                <span class="approval-type">Suspension</span>
+              </div>
+              <p>Account #5678 - Policy violation review</p>
+              <div class="approval-actions">
+                <button class="btn btn-primary">Restore</button>
+                <button class="btn btn-secondary">Permanent Ban</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="scripts/dashboard-admin.js"></script>
+</body>
+</html> 

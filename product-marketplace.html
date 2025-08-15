@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Marketplace - Hercules Pro</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    .marketplace-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .marketplace-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .marketplace-header h1 {
+      color: #2c1810;
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    
+    .marketplace-header p {
+      color: #666;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      margin-bottom: 1.5rem;
+    }
+    
+    .add-product-btn {
+      background: linear-gradient(135deg, #28a745, #20c997);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    }
+    
+    .add-product-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .my-products-btn {
+      background: linear-gradient(135deg, #17a2b8, #6f42c1);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+    }
+    
+    .my-products-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(23, 162, 184, 0.4);
+    }
+    
+    .my-products-btn.active {
+      background: linear-gradient(135deg, #6f42c1, #17a2b8);
+    }
+    
+    .filters-section {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e5e5;
+      margin-bottom: 2rem;
+    }
+    
+    .filters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      align-items: end;
+    }
+    
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .filter-group label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+    
+    .filter-group input,
+    .filter-group select {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    
+    .filter-group input:focus,
+    .filter-group select:focus {
+      outline: none;
+      border-color: #f5e9da;
+      box-shadow: 0 0 0 2px rgba(245, 233, 218, 0.3);
+    }
+    
+    .clear-filters-btn {
+      background: #6c757d;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+    
+    .clear-filters-btn:hover {
+      background: #5a6268;
+    }
+    
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e5e5;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+    
+    .product-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+    }
+    
+    .product-info {
+      padding: 1.5rem;
+    }
+    
+    .product-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c1810;
+      margin-bottom: 0.5rem;
+    }
+    
+    .product-description {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #28a745;
+      margin-bottom: 1rem;
+    }
+    
+    .product-category {
+      display: inline-block;
+      background: #f5e9da;
+      color: #2c1810;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .seller-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .seller-avatar {
+      width: 24px;
+      height: 24px;
+      background: #f5e9da;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #2c1810;
+    }
+    
+    .product-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .view-btn {
+      background: #17a2b8;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.2s ease;
+      flex: 1;
+    }
+    
+    .view-btn:hover {
+      background: #138496;
+    }
+    
+    .contact-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.2s ease;
+      flex: 1;
+    }
+    
+    .contact-btn:hover {
+      background: #218838;
+    }
+    
+    .delete-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.2s ease;
+      flex: 1;
+    }
+    
+    .delete-btn:hover {
+      background: #c82333;
+    }
+    
+    .no-products {
+      text-align: center;
+      padding: 3rem;
+      color: #666;
+    }
+    
+    .no-products span {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    
+    .product-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 0;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    .modal-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid #e5e5e5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #2c1810;
+    }
+    
+    .close-modal {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #666;
+    }
+    
+    .modal-body {
+      padding: 1.5rem;
+    }
+    
+    .modal-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .modal-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #28a745;
+      margin-bottom: 1rem;
+    }
+    
+    .modal-description {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    
+    .modal-seller {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .modal-btn {
+      flex: 1;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+    
+    .modal-btn.primary {
+      background: #28a745;
+      color: white;
+    }
+    
+    .modal-btn.primary:hover {
+      background: #218838;
+    }
+    
+    .modal-btn.secondary {
+      background: #6c757d;
+      color: white;
+    }
+    
+    .modal-btn.secondary:hover {
+      background: #5a6268;
+    }
+    
+    /* Add Product Form Styles */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+    
+    .form-group label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #f5e9da;
+      box-shadow: 0 0 0 2px rgba(245, 233, 218, 0.3);
+    }
+    
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      border-top: 1px solid #e5e5e5;
+      padding-top: 1.5rem;
+    }
+    
+    .products-summary {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e5e5;
+      margin-top: 2rem;
+    }
+    
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    
+    .summary-card {
+      text-align: center;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border: 1px solid #e9ecef;
+    }
+    
+    .summary-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #28a745;
+      margin-bottom: 0.5rem;
+    }
+    
+    .summary-label {
+      color: #666;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    @media (max-width: 768px) {
+      .filters-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .modal-content {
+        width: 95%;
+        margin: 10% auto;
+      }
+      
+      .modal-actions,
+      .form-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="logo" aria-label="Hercules Pro Home">
+          <img src="assets/hercules-pro-logo.jpg.png" alt="Hercules Pro Logo" class="logo-img">
+          <span class="logo-text">Hercules Pro</span>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item">
+            <a href="dashboard-client.html" class="nav-link">
+              <span class="nav-icon">Dashboard</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a href="product-marketplace.html" class="nav-link">
+              <span class="nav-icon">Marketplace</span>
+              <span>Marketplace</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="community.html" class="nav-link">
+              <span class="nav-icon">Community</span>
+              <span>Community</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="training-programs.html" class="nav-link">
+              <span class="nav-icon">Training</span>
+              <span>Training Programs</span>
+              </a>
+          </li>
+          <li class="nav-item">
+            <a href="calorie-tracker.html" class="nav-link">
+              <span class="nav-icon">🍽️</span>
+              <span>Calorie Counter</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="meal-plans.html" class="nav-link">
+              <span class="nav-icon">🥗</span>
+              <span>Nutrition</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#progress" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Progress</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#ai-coach" class="nav-link">
+                              <span class="nav-icon">AI Coach</span>
+              <span>AI Coach</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#profile" class="nav-link">
+              <span class="nav-icon">👤</span>
+              <span>Profile</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button class="btn btn-secondary logout-btn" onclick="logout()">
+          <span class="nav-icon">🚪</span>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="marketplace-container">
+        <a href="dashboard-client.html" class="back-btn">← Back to Dashboard</a>
+        
+        <div class="marketplace-header">
+          <h1>Product Marketplace</h1>
+          <p>Discover amazing fitness products and services from professional trainers</p>
+          <div class="header-actions">
+            <button class="add-product-btn" onclick="openAddProductModal()">Add New Product</button>
+            <button class="my-products-btn" onclick="toggleMyProducts()">My Products</button>
+          </div>
+        </div>
+
+        <!-- Filters Section -->
+        <div class="filters-section">
+          <div class="filters-grid">
+            <div class="filter-group">
+              <label for="searchProducts">Search Products</label>
+              <input type="text" id="searchProducts" placeholder="Search by name or description...">
+            </div>
+            
+            <div class="filter-group">
+              <label for="categoryFilter">Category</label>
+              <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="supplements">Supplements</option>
+                <option value="nutrition">Nutrition Products</option>
+                <option value="gym-membership">Gym Membership Service</option>
+                <option value="equipment">Fitness Equipment</option>
+                <option value="clothing">Workout Clothing</option>
+                <option value="services">Training Services</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label for="priceMin">Min Price (৳)</label>
+              <input type="number" id="priceMin" placeholder="0" min="0">
+            </div>
+            
+            <div class="filter-group">
+              <label for="priceMax">Max Price (৳)</label>
+              <input type="number" id="priceMax" placeholder="10000" min="0">
+            </div>
+            
+            <div class="filter-group">
+              <button class="clear-filters-btn" onclick="clearFilters()">Clear Filters</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="productsGrid">
+          <!-- Products will be loaded here dynamically -->
+        </div>
+        
+        <!-- Products Summary -->
+        <div class="products-summary" id="productsSummary">
+          <!-- Summary will be loaded here dynamically -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Product Modal -->
+  <div class="product-modal" id="productModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">Product Name</h2>
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Modal content will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Product Modal -->
+  <div class="product-modal" id="addProductModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Add New Product</h2>
+        <button class="close-modal" onclick="closeAddProductModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="addProductForm" onsubmit="submitProduct(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="productName">Product Name *</label>
+              <input type="text" id="productName" name="productName" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="productCategory">Category *</label>
+              <select id="productCategory" name="productCategory" required>
+                <option value="">Select Category</option>
+                <option value="supplements">Supplements</option>
+                <option value="nutrition">Nutrition Products</option>
+                <option value="gym-membership">Gym Membership Service</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="productPrice">Price (৳) *</label>
+              <input type="number" id="productPrice" name="productPrice" min="0" step="0.01" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="productStock">Stock/Quantity *</label>
+              <input type="number" id="productStock" name="productStock" min="1" required>
+            </div>
+            
+            <div class="form-group full-width">
+              <label for="productDescription">Description *</label>
+              <textarea id="productDescription" name="productDescription" rows="4" required placeholder="Describe your product in detail..."></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="productImage">Image URL</label>
+              <input type="url" id="productImage" name="productImage" placeholder="https://example.com/image.jpg">
+            </div>
+            
+            <div class="form-group">
+              <label for="productContact">Contact Info *</label>
+              <input type="text" id="productContact" name="productContact" required placeholder="Email or phone number">
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="modal-btn secondary" onclick="closeAddProductModal()">Cancel</button>
+            <button type="submit" class="modal-btn primary">Add Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/product-marketplace.js"></script>
+</body>
+</html>

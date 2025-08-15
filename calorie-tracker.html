@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Calorie Counter - Hercules Pro</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="stylesheet" href="styles/bengali-calorie-calculator.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    .tracker-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .tracker-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .tracker-header h1 {
+      color: #2c1810;
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    
+    .tracker-header p {
+      color: #666;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .tracker-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .tab-btn {
+      background: white;
+      border: 2px solid #e5e5e5;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #666;
+      transition: all 0.3s ease;
+    }
+    
+    .tab-btn.active {
+      background: #f5e9da;
+      border-color: #f5e9da;
+      color: #2c1810;
+    }
+    
+    .tab-btn:hover {
+      border-color: #f5e9da;
+      color: #2c1810;
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .quick-add-section {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e5e5;
+      margin-bottom: 2rem;
+    }
+    
+    .quick-add-section h3 {
+      color: #2c1810;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .quick-add-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 1rem;
+      align-items: end;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-group label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+    
+    .form-group input,
+    .form-group select {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #f5e9da;
+      box-shadow: 0 0 0 2px rgba(245, 233, 218, 0.3);
+    }
+    
+    .add-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+    
+    .add-btn:hover {
+      background: #218838;
+    }
+    
+    .daily-summary {
+      background: linear-gradient(135deg, #f5e9da, #e8d5c0);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .summary-item {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
+    }
+    
+    .summary-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2c1810;
+      margin-bottom: 0.5rem;
+    }
+    
+    .summary-label {
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .progress-bar {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      height: 20px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #28a745, #20c997);
+      transition: width 0.3s ease;
+    }
+    
+    .progress-text {
+      text-align: center;
+      color: #2c1810;
+      font-weight: 600;
+    }
+    
+    .meal-log {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e5e5;
+      margin-bottom: 2rem;
+    }
+    
+    .meal-log h3 {
+      color: #2c1810;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .meal-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .meal-item:last-child {
+      border-bottom: none;
+    }
+    
+    .meal-info {
+      flex: 1;
+    }
+    
+    .meal-name {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.25rem;
+    }
+    
+    .meal-details {
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .meal-calories {
+      font-weight: 600;
+      color: #2c1810;
+      font-size: 1.1rem;
+    }
+    
+    .delete-btn {
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.5rem;
+      cursor: pointer;
+      margin-left: 1rem;
+      transition: background-color 0.2s ease;
+    }
+    
+    .delete-btn:hover {
+      background: #ff5252;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .btn-export {
+      background: #17a2b8;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-export:hover {
+      background: #138496;
+      transform: translateY(-1px);
+    }
+    
+    @media (max-width: 768px) {
+      .quick-add-form {
+        grid-template-columns: 1fr;
+      }
+      
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .meal-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      
+      .meal-calories {
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="logo" aria-label="Hercules Pro Home">
+          <img src="assets/hercules-pro-logo.jpg.png" alt="Hercules Pro Logo" class="logo-img">
+          <span class="logo-text">Hercules Pro</span>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item">
+            <a href="dashboard-client.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="training-programs.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Training Programs</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a href="calorie-tracker.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Calorie Counter</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="bengali-calorie-calculator.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Bengali Foods</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="meal-plans.html" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Nutrition</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#progress" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Progress</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#ai-coach" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>AI Coach</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#profile" class="nav-link">
+              <span class="nav-icon"></span>
+              <span>Profile</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button class="btn btn-secondary logout-btn" onclick="logout()">
+          <span class="nav-icon"></span>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="tracker-container">
+        <a href="dashboard-client.html" class="back-btn">← Back to Dashboard</a>
+        
+        <div class="tracker-header">
+          <h1>🍽️ Smart Calorie Counter</h1>
+          <p>Track your daily calorie intake with precision. Choose from Bengali foods or add custom items.</p>
+        </div>
+
+        <!-- Daily Summary -->
+        <div class="daily-summary">
+          <div class="summary-grid">
+            <div class="summary-item">
+              <div class="summary-value" id="totalCalories">0</div>
+              <div class="summary-label">Total Calories</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-value" id="calorieGoal">2000</div>
+              <div class="summary-label">Daily Goal</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-value" id="remainingCalories">2000</div>
+              <div class="summary-label">Remaining</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-value" id="foodCount">0</div>
+              <div class="summary-label">Food Items</div>
+            </div>
+          </div>
+          
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+          </div>
+          <div class="progress-text" id="progressText">0% of daily goal</div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tracker-tabs">
+          <button class="tab-btn active" onclick="showTab('quick-add')">Quick Add</button>
+          <button class="tab-btn" onclick="showTab('bengali-foods')">Bengali Foods</button>
+          <button class="tab-btn" onclick="showTab('meal-log')">Meal Log</button>
+        </div>
+
+        <!-- Quick Add Tab -->
+        <div class="tab-content active" id="quick-add">
+          <div class="quick-add-section">
+            <h3>Add Custom Food Item</h3>
+            <form class="quick-add-form" id="quickAddForm">
+              <div class="form-group">
+                <label for="foodName">Food Name</label>
+                <input type="text" id="foodName" placeholder="e.g., Grilled Chicken" required>
+              </div>
+              <div class="form-group">
+                <label for="calories">Calories</label>
+                <input type="number" id="calories" placeholder="e.g., 250" required min="0">
+              </div>
+              <button type="submit" class="add-btn">Add Food</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Bengali Foods Tab -->
+        <div class="tab-content" id="bengali-foods">
+          <div class="food-categories">
+            <!-- Rice & Breads -->
+            <div class="category-card">
+              <h3 class="category-title">🍚 Rice & Breads</h3>
+              <div class="food-item">
+                <div>
+                  <div class="food-name">Plain Rice (1 cup)</div>
+                  <div class="food-calories">205 calories</div>
+                </div>
+                <div class="quantity-input">
+                  <button onclick="decreaseQuantity('rice')">-</button>
+                  <input type="number" id="rice" value="0" min="0" onchange="updateCalories()">
+                  <button onclick="increaseQuantity('rice')">+</button>
+                </div>
+              </div>
+              <div class="food-item">
+                <div>
+                  <div class="food-name">Roti/Chapati (1 piece)</div>
+                  <div class="food-calories">120 calories</div>
+                </div>
+                <div class="quantity-input">
+                  <button onclick="decreaseQuantity('roti')">-</button>
+                  <input type="number" id="roti" value="0" min="0" onchange="updateCalories()">
+                  <button onclick="increaseQuantity('roti')">+</button>
+                </div>
+              </div>
+              <div class="food-item">
+                <div>
+                  <div class="food-name">Paratha (1 piece)</div>
+                  <div class="food-calories">180 calories</div>
+                </div>
+                <div class="quantity-input">
+                  <button onclick="decreaseQuantity('paratha')">-</button>
+                  <input type="number" id="paratha" value="0" min="0" onchange="updateCalories()">
+                  <button onclick="increaseQuantity('paratha')">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fish & Seafood -->
+            <div class="category-card">
+              <h3 class="category-title">🐟 Fish & Seafood</h3>
+              <div class="food-item">
+                <div>
+                  <div class="food-name">Hilsa Fish (100g)</div>
+                  <div class="food-calories">280 calories</div>
+                </div>
+                <div class="quantity-input">
+                  <button onclick="decreaseQuantity('hilsa')">-</button>
+                  <input type="number" id="hilsa" value="0" min="0" onchange="updateCalories()">
+                  <button onclick="increaseQuantity('hilsa')">+</button>
+                </div>
+              </div>
+              <div class="food-item">
+                <div>
+                  <div class="food-name">Rohu Fish (100g)</div>
+                  <div class="food-calories">220 calories</div>
+                </div>
+                <div class="quantity-input">
+                  <button onclick="decreaseQuantity('rohu')">-</button>
+                  <input type="number" id="rohu" value="0" min="0" onchange="updateCalories()">
+                  <button onclick="increaseQuantity('rohu')">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Meat Dishes -->
+            <div class="category-card">
+              <h3 class="category-title">🍖 Meat Dishes</h3>
+              <div class="food-item">
+                <div>
+                  <div class="food-name">Mutton Curry (100g)</div>
+                  <div class="food-calories">320 calories</div>
+                </div>
+                <div class="quantity-input">
+                  <button onclick="decreaseQuantity('mutton')">-</button>
+                  <input type="number" id="mutton" value="0" min="0" onchange="updateCalories()">
+                  <button onclick="increaseQuantity('mutton')">+</button>
+                </div>
+              </div>
+              <div class="food-item">
+                <div>
+                  <div class="food-name">Chicken Curry (100g)</div>
+                  <div class="food-calories">250 calories</div>
+                </div>
+                <div class="quantity-input">
+                  <button onclick="decreaseQuantity('chicken')">-</button>
+                  <input type="number" id="chicken" value="0" min="0" onchange="updateCalories()">
+                  <button onclick="increaseQuantity('chicken')">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Meal Log Tab -->
+        <div class="tab-content" id="meal-log">
+          <div class="meal-log">
+            <h3>Today's Food Log</h3>
+            <div id="mealLogList">
+              <!-- Meal items will be added here dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button class="btn-clear" onclick="clearAll()">Clear All</button>
+          <button class="btn-save" onclick="saveCalories()">Save to Dashboard</button>
+          <button class="btn-export" onclick="exportData()">Export Data</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="scripts/calorie-tracker.js"></script>
+</body>
+</html>
